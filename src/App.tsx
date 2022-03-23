@@ -2,7 +2,8 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyles from './styles/GlobalStyles'
 
-import Layout from './components/Layout'
+import Routes from './routes'
+
 import { dark } from './styles/themes/dark'
 
 
@@ -10,7 +11,7 @@ export const App = () => {
   return (
     <ThemeProvider theme={ dark }>
         <GlobalStyles/>
-        <Layout/>
+        <Routes/>
     </ThemeProvider>
   )
 }

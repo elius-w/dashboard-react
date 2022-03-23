@@ -11,10 +11,14 @@ export default createGlobalStyle`
        height:100%;
    }
 
-   *, :no-button, input{
+   * :no-button, input{
        border: 0;
        outline: 0;
-       font-family: 'Roboto', sans-serif;
+   }
+
+   body{
+    font-family: 'Roboto', sans-serif;
+
    }
 
    button{

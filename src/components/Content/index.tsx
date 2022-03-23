@@ -2,11 +2,11 @@
 import React from 'react'
 import {Container} from './styles'
 
-export const Content = () => {
+export const Content: React.FC = ({ children }) => {
   return (
 
         <Container>
-            <h1>Content</h1>
+            {children}
         </Container>
        
       

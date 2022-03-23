@@ -1,5 +1,6 @@
 import React from 'react'
 import logoImg from '../../assets/logo.svg'
+import { Link } from 'react-router-dom';
 
 import {
   MdDashboard,
@@ -13,7 +14,6 @@ import {
   Header,
   LogImg,
   MenuContainer,
-  MenuItemLink,
   Title
 } from './styles'
 
@@ -27,25 +27,25 @@ export const Aside = () => {
            </Header>
 
             <MenuContainer>
-                <MenuItemLink href="#">
+                <Link to="/dashboard">
                   <MdDashboard />
                   Dashboard
-                </MenuItemLink>
+                </Link>
 
-                <MenuItemLink href="#">
+                <Link to="/list/entry-balance">
                   <MdArrowUpward/>
                   Entradas
-                </MenuItemLink>
+                </Link>
 
-                <MenuItemLink href="#">
+                <Link to="/list/exit-balance">
                   <MdArrowDownward/>
                   Saídas
-                </MenuItemLink>
+                </Link>
 
-                <MenuItemLink href="#">
+                <Link to="#">
                   <MdExitToApp/>
                   Sair
-                </MenuItemLink>
+                </Link>
 
             </MenuContainer>
 
