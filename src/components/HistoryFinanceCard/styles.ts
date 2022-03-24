@@ -24,6 +24,11 @@ export const Container = styled.li`
         padding-left: 10px;
     }
 
+    > div span {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
     &:hover{
         opacity: 0.7;
         transform: translateX(10px);
