@@ -36,12 +36,12 @@ export const List: React.FC = () => {
     return type === 'entry-balance' ?
     {
       title: 'Entradas',
-      lineColor: 'F7931B',
+      lineColor: '#4E41F0',
       data: gains
     }:
     {
       title: 'Saídas',
-      lineColor: 'E44C4E',
+      lineColor: '#E44C4E',
       data: expenses
     }
   },[type])
@@ -147,6 +147,7 @@ export const List: React.FC = () => {
       <ContentHeader title={pageData.title} lineColor={pageData.lineColor}>
       <SelectInput options={months} onChange={(e) => handleMonthSelected(e.target.value)} defaultValue={monthSelected}/>
       <SelectInput options={years} onChange={(e) => handleYearSelected(e.target.value)} defaultValue={yearSelected}/>
+     
       </ContentHeader>
 
       <Filters>
