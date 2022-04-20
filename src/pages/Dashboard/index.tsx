@@ -5,6 +5,7 @@ import { Container, Content } from "./styles";
 
 import WalletBox from "../../components/WalletBox";
 import MessageBox from "../../components/MessageBox";
+import PieChartBox from "../../components/PieChartBox";
 
 import expenses from "../../repositories/expenses";
 import gains from "../../repositories/gains";
@@ -44,7 +45,7 @@ export const Dashboard: React.FC = () => {
         label: year,
       };
     });
-  }, []);
+  },[]);
 
   const totalExpenses = useMemo(() => {
     let total: number = 0;
@@ -64,67 +65,93 @@ export const Dashboard: React.FC = () => {
     });
 
     return total;
-},[monthSelected, yearSelected]);
+  },[monthSelected, yearSelected]);
 
-const totalGains = useMemo(() => {
-  let total: number = 0;
+  const totalGains = useMemo(() => {
+    let total: number = 0;
 
-  gains.forEach(item => {
-      const date = new Date(item.date);
-      const year = date.getFullYear();
-      const month = date.getMonth() + 1;
+    gains.forEach(item => {
+        const date = new Date(item.date);
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
 
-      if(month === monthSelected && year === yearSelected){
-          try{
-              total += Number(item.amount)
-          }catch{
-              throw new Error('Invalid amount! Amount must be number.')
-          }
+        if(month === monthSelected && year === yearSelected){
+            try{
+                total += Number(item.amount)
+            }catch{
+                throw new Error('Invalid amount! Amount must be number.')
+            }
+        }
+    });
+
+    return total;
+  },[monthSelected, yearSelected]);
+
+  const totalBalance = useMemo(() => {
+    return totalGains - totalExpenses;
+  },[totalGains, totalExpenses]);
+
+  const message = useMemo(() => {
+    if(totalBalance < 0){
+        return {
+            title: "Que triste!",
+            description: "Neste mês, você gastou mais do que deveria.",
+            footerText: "Verifique seus gastos e tente cortar algumas coisas desnecessárias.",
+            icon: sadImg
+        }
+    }      
+    else if(totalGains === 0 && totalExpenses === 0){
+        return {
+            title: "Op's!",
+            description: "Neste mês, não há registros de entradas ou saídas.",
+            footerText: "Parece que você não fez nenhum registro no mês e ano selecionado.",
+            icon: opsImg
+        }
+    }
+    else if(totalBalance === 0){
+        return {
+            title: "Ufaa!",
+            description: "Neste mês, você gastou exatamente o que ganhou.",
+            footerText: "Tenha cuidado. No próximo tente poupar o seu dinheiro.",
+            icon: grinningImg
+        }
+    }
+    else{
+        return {
+            title: "Muito bem!",
+            description: "Sua carteira está positiva!",
+            footerText: "Continue assim. Considere investir o seu saldo.",
+            icon: happyImg
+        }
+    }
+
+  },[totalBalance, totalGains, totalExpenses]);
+
+  const relationExpensesVersusGains = useMemo(() => {
+    const total = totalGains + totalExpenses
+    const percentGains = (totalGains / total) * 100
+    const percentExpenses = (totalExpenses / total) * 100
+
+    const data = [
+      {
+        name: "Entradas",
+        value: totalExpenses,
+        percent: Number(percentGains.toFixed(1)),
+        color: '#E44C4E'
+      },
+      {
+        name: "Saídas",
+        value: totalExpenses,
+        percent: Number(percentExpenses.toFixed(1)),
+        color: '#F7931B'
       }
-  });
+    ]
 
-  return total;
- },[monthSelected, yearSelected]);
+    return data
 
- const totalBalance = useMemo(() => {
-  return totalGains - totalExpenses;
-},[totalGains, totalExpenses]);
 
-const message = useMemo(() => {
-  if(totalBalance < 0){
-      return {
-          title: "Que triste!",
-          description: "Neste mês, você gastou mais do que deveria.",
-          footerText: "Verifique seus gastos e tente cortar algumas coisas desnecessárias.",
-          icon: sadImg
-      }
-  }      
-  else if(totalGains === 0 && totalExpenses === 0){
-      return {
-          title: "Op's!",
-          description: "Neste mês, não há registros de entradas ou saídas.",
-          footerText: "Parece que você não fez nenhum registro no mês e ano selecionado.",
-          icon: opsImg
-      }
-  }
-  else if(totalBalance === 0){
-      return {
-          title: "Ufaa!",
-          description: "Neste mês, você gastou exatamente o que ganhou.",
-          footerText: "Tenha cuidado. No próximo tente poupar o seu dinheiro.",
-          icon: grinningImg
-      }
-  }
-  else{
-      return {
-          title: "Muito bem!",
-          description: "Sua carteira está positiva!",
-          footerText: "Continue assim. Considere investir o seu saldo.",
-          icon: happyImg
-      }
-  }
+  },[totalGains, totalExpenses])
 
-},[totalBalance, totalGains, totalExpenses]);
 
   const months = useMemo(() => {
     return listOfMonths.map((month, index) => {
@@ -133,7 +160,7 @@ const message = useMemo(() => {
         label: month,
       };
     });
-  }, []);
+  },[]);
 
   const handleMonthSelected = (month: string) => {
     try {
@@ -198,6 +225,8 @@ const message = useMemo(() => {
           footerText={message.footerText}
           icon={message.icon}
         />
+
+        <PieChartBox data={relationExpensesVersusGains}/>
       </Content>
     </Container>
   );
