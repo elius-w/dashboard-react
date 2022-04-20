@@ -3,7 +3,7 @@ import { Container } from "./styles";
 import CountUp from 'react-countup';
 import dolarImg from "../../assets/dolar.svg";
 import arrowUpImg from "../../assets/arrow-up.svg";
-import arrowDownImg from "../../assets/arrow-down.svg";
+import arrowDownImg from '../../assets/arrow-down.svg';
 
 interface IWalletBoxProps {
   title: string;

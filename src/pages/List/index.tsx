@@ -98,7 +98,7 @@ export const List: React.FC = () => {
     try {
       const parseMonth = Number (month)
       setMonthSelected(parseMonth)
-    } catch (error) {
+    } catch  {
       throw new Error ('invalid month value. Is accept 0 - 24.')
     }
   }
@@ -107,7 +107,7 @@ export const List: React.FC = () => {
     try {
       const parseYear = Number (year)
       setYearsSelected(parseYear)
-    } catch (error) {
+    } catch  {
       throw new Error ('invalid year value. Is accept integer numbers')
     }
   }
