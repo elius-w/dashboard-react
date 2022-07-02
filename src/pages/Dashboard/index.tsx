@@ -6,6 +6,8 @@ import { Container, Content } from "./styles";
 import WalletBox from "../../components/WalletBox";
 import MessageBox from "../../components/MessageBox";
 import PieChartBox from "../../components/PieChartBox";
+import HistoryBox from "../../components/HistoryBox"
+import BarChartBox from "../../components/BarChartBox";
 
 import expenses from "../../repositories/expenses";
 import gains from "../../repositories/gains";
@@ -152,6 +154,51 @@ export const Dashboard: React.FC = () => {
 
   },[totalGains, totalExpenses])
 
+  const historyData = useMemo(() => {
+    return listOfMonths
+    .map((_, month) => {
+
+      let amountEntry = 0;
+      gains.forEach(gain => {
+          const date = new Date(gain.date);
+          const gainMonth = date.getMonth();
+          const gainYear = date.getFullYear();
+
+          if(gainMonth === month && gainYear === yearSelected){
+              try{
+                  amountEntry += Number(gain.amount);
+              }catch{
+                  throw new Error('amountEntry is invalid. amountEntry must be valid number.')
+              }
+          }
+      });
+
+       let amountOutput = 0;
+       expenses.forEach(expense => {
+           const date = new Date(expense.date);
+           const expenseMonth = date.getMonth();
+           const expenseYear = date.getFullYear();
+
+           if(expenseMonth === month && expenseYear === yearSelected){
+              try{
+                  amountOutput += Number(expense.amount);
+              }catch{
+                  throw new Error('amountOutput is invalid. amountOutput must be valid number.')
+              }
+           }
+       });
+
+      
+       return {
+        monthNumber: month,
+        month: listOfMonths[month].substr(0, 3),
+        amountEntry,
+        amountOutput
+       }
+
+     })
+  },[yearSelected])
+
 
   const months = useMemo(() => {
     return listOfMonths.map((month, index) => {
@@ -161,6 +208,56 @@ export const Dashboard: React.FC = () => {
       };
     });
   },[]);
+
+  const relationExpensevesRecurrentVersusEventual = useMemo(() => {
+
+    let amountRecurrent = 0
+    let amountEventual = 0
+
+    expenses
+    .filter((expense) =>{
+      const date = new Date(expense.date)
+      const year = date.getFullYear()
+      const month = date.getMonth() + 1
+
+      return month === monthSelected && year === yearSelected
+      
+    })
+
+    .forEach((expense) => {
+
+      if(expense.frequency === 'recorrente'){
+        return amountRecurrent += Number (expense.amount)
+      }
+
+      if(expense.frequency === 'recorrente'){
+        return amountEventual += Number (expense.amount)
+      }
+
+    })
+
+
+    const total = amountRecurrent + amountEventual
+   
+
+
+    return[
+      {
+        name: 'Recorrente',
+        amount: amountRecurrent,
+        percent: Number (((amountEventual / total) * 100).toFixed(1)),
+        color: "#F7931B"
+      },
+      {
+        name: 'Eventuais',
+        amount: amountEventual,
+        percent: Number (((amountEventual / total) * 100).toFixed(1)),
+        color: "#E44C4E"
+      }
+    ]
+
+
+  },[monthSelected, yearSelected])
 
   const handleMonthSelected = (month: string) => {
     try {
@@ -227,6 +324,18 @@ export const Dashboard: React.FC = () => {
         />
 
         <PieChartBox data={relationExpensesVersusGains}/>
+
+        <HistoryBox
+          data={historyData}
+          lineColorAmountEntry="#F7931B"
+          lineColorAmountOutput="#E44C4E"
+        />
+
+        <BarChartBox
+          title="Saídas"
+          data={relationExpensevesRecurrentVersusEventual}
+        />
+
       </Content>
     </Container>
   );
