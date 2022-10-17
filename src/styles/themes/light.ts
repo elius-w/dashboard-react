@@ -1,5 +1,6 @@
 export const light = {
     title: 'light',
+    
     colors: {
         primary: '#DCDCDC',
         secondary: '#FFF',

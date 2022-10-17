@@ -46,19 +46,26 @@ export const BarChartBox: React.FC<IBarChartProps> = ({
            <SideRight>
               <ResponsiveContainer>
                   <BarChart data={data}>
-                      <Bar dataKey="amount">
+                  <Bar dataKey="amount" name="Valor">
                         {
                         data.map((indicator) =>(
                           <Cell
-                            key={indicator.name}
-                            cursor="pointer"
-                            fill={indicator.color}
+                          key={indicator.name}
+                          fill={indicator.color}
+                          cursor="pointer"  
                            
                           />
                         ))
                         }
                       </Bar>
-                      {/* <Tooltip formatter={(value: any) => formatCurrency(Number(value))}/> */}
+                      <Tooltip 
+                            cursor={{fill: 'none'}}
+                            formatter={(value:number) => formatCurrency(Number(value))} 
+                        />
+                      {/* <Tooltip formatter={(value: number) => formatCurrency(Number(value))}/> */}
+
+
+
                   </BarChart>
               </ResponsiveContainer>           
            </SideRight>
