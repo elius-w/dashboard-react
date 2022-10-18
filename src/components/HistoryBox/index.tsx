@@ -52,7 +52,7 @@ export const HistoryBox: React.FC<IHistoryBoxProps> = ({
             <LineChart data={data} margin={{ top:5, right:20, left:20, bottom: 5}}>
               <CartesianGrid strokeDasharray="3 3" stroke="#cecece"/>
               <XAxis dataKey="month" stroke="#cecece"/>
-              <Tooltip formatter={(value: number) => formatCurrency(Number(value))}/>
+              <Tooltip formatter={(value) => formatCurrency(Number(value))}/>
 
             
               <Line
