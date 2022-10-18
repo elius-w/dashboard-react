@@ -15,7 +15,7 @@ interface IPieChartProps {
 export const PieChartBox: React.FC<IPieChartProps> = ({data}) => (
   <Container>
     <SideLeft>
-      <h1>Relação</h1>
+      <h2>Relação</h2>
       
       <LegendContainer>
         {
@@ -30,7 +30,7 @@ export const PieChartBox: React.FC<IPieChartProps> = ({data}) => (
     </SideLeft>    
 
     <SideRight>
-      <ResponsiveContainer>
+      <ResponsiveContainer width="99%" height={200}>
           <PieChart>
               <Pie data={data} dataKey="percent">
                   {

@@ -1,12 +1,13 @@
 import React, {useMemo, useState} from 'react'
 import emojis from '../../utils/emojis'
-import Toogle from '../Toggle'
+import Toggle from '../Toggle'
 import {useTheme} from '../../hooks/theme'
 
-import { Container, 
+import { 
+  Container, 
   Profile, 
   Welcome, 
-  UserName 
+  UserName,
 } from './styles'
 
 export const MainHeader = () => {
@@ -27,7 +28,7 @@ export const MainHeader = () => {
   return (
 
         <Container>
-            <Toogle
+            <Toggle
               labelLeft="Light"  
               labelRight="Dark"
               checked={darkTheme}
@@ -36,7 +37,7 @@ export const MainHeader = () => {
 
             <Profile>
               <Welcome>Olá,{emoji}</Welcome>
-              <UserName>Rodrigo Gonçalves</UserName>
+              <UserName>Hélio</UserName>
             </Profile>
         </Container>
        

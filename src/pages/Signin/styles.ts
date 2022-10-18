@@ -13,24 +13,43 @@ export const Container = styled.div`
 
 export const Logo = styled.div`
     display: flex;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 30px;
     > h2 {
         color: ${props => props.theme.colors.white}; 
-        margin-left: 7px;
+        margin-top: 7px;;
     }
     > img {
         width: 40px;
         height: 40px;
+        border-radius: 50px;
     }
 `;
 
 export const Form = styled.form`
     width: 300px;
-    height: 300px;
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 30px;
     background-color: ${props => props.theme.colors.tertiary};
+    box-shadow: 0px 5px 13px 7px #0000001f;
+
+    svg{
+        margin-right: 5px;
+    }
+    
+    h3{
+        display: flex;        
+        justify-content:center;
+        color: #ebe168;
+        border: 1px solid #ebe168;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        padding:0.5rem;
+        border-radius: 50px;
+        margin-bottom: 0.5rem;
+    }
 `;
 
 export const FormTitle = styled.h1`

@@ -18,6 +18,7 @@ export default createGlobalStyle`
 
    body{
     font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
 
    }
 
