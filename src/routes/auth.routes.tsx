@@ -5,11 +5,9 @@ import SignIn from "../pages/SignIn";
 
 const AuthRoutes: React.FC = () =>  (
 
-    <SignIn>
         <Routes>
-            <Route path="/" element={<SignIn/>} />    
+            <Route path="/dashboad" element={<SignIn/>} />    
         </Routes> 
-    </SignIn>
 
  )
 
