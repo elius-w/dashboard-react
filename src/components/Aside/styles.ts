@@ -56,6 +56,9 @@ export const Header = styled.header`
   height: 70px;
   display: flex;
   align-items: center;
+  > button {
+    border: none;
+  }
 `;
 
 export const LogImg = styled.img`
@@ -107,12 +110,15 @@ export const MenuItemButton = styled.button`
   display: flex;
   align-items: center;
   transition: opacity 0.3s;
+  
   &:hover {
     opacity: 0.7;
   }
   > svg {
     font-size: 18px;
     margin-right: 5px;
+  }
+  border: none;
   }
 `;
 

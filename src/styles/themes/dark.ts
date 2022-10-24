@@ -9,7 +9,7 @@ export const dark = {
 
     white: '#FFF',
     black: '#000',
-    gray: '#BFBFBF',
+    gray: '#363638',
 
     success: '#4E41F0',
     info: '#F7931B',

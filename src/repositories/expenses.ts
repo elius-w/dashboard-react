@@ -5,7 +5,7 @@ export default [
     amount: '150.55',
     type: 'saída',
     frequency: 'recorrente',
-    date: '2015-01-10'
+    date: '2021-01-10'
   },
   {
     description: 'Água',
