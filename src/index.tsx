@@ -1,8 +1,9 @@
+/* eslint-disable import/no-named-as-default */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import { ThemeProvider } from './hooks/theme'
-import { AuthProvider } from './hooks/auth'
+import { ThemeProvider } from './hooks/theme';
+import { AuthProvider } from './hooks/auth';
 import App from './App';
 
 ReactDOM.render(

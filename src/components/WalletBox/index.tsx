@@ -1,15 +1,17 @@
-import React, { useMemo } from "react";
-import { Container } from "./styles";
+/* eslint-disable import/no-unresolved */
+/* eslint-disable react/function-component-definition */
+import React, { useMemo } from 'react';
 import CountUp from 'react-countup';
-import dolarImg from "../../assets/dolar.svg";
-import arrowUpImg from "../../assets/arrow-up.svg";
+import { Container } from './styles';
+import dolarImg from '../../assets/dolar.svg';
+import arrowUpImg from '../../assets/arrow-up.svg';
 import arrowDownImg from '../../assets/arrow-down.svg';
 
 interface IWalletBoxProps {
   title: string;
   amount: number;
   footerlabel: string;
-  icon: "dolar" | "arrowUp" | "arrowDown" | "undefined";
+  icon: 'dolar' | 'arrowUp' | 'arrowDown' | 'undefined';
   color: string;
 }
 
@@ -18,17 +20,17 @@ export const WalletBox: React.FC<IWalletBoxProps> = ({
   amount,
   footerlabel,
   icon,
-  color,
+  color
 }) => {
   const iconSelected = useMemo(() => {
     switch (icon) {
-      case "dolar":
+      case 'dolar':
         return dolarImg;
 
-      case "arrowUp":
+      case 'arrowUp':
         return arrowUpImg;
 
-      case "arrowDown":
+      case 'arrowDown':
         return arrowDownImg;
 
       default:
@@ -41,12 +43,8 @@ export const WalletBox: React.FC<IWalletBoxProps> = ({
       <span>{title}</span>
       <h1>
         <strong>R$ </strong>
-        <CountUp 
-          end={amount}
-          separator="."
-          decimal=","
-          decimals={2}
-        /></h1>
+        <CountUp end={amount} separator="." decimal="," decimals={2} />
+      </h1>
       <small>{footerlabel}</small>
       <img src={iconSelected} alt={title} />
     </Container>

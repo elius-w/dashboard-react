@@ -1,4 +1,5 @@
-import styled, {keyframes} from 'styled-components';
+/* eslint-disable import/prefer-default-export */
+import styled, { keyframes } from 'styled-components';
 
 const animate = keyframes`
     0% {
@@ -28,19 +29,18 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  animation: ${animate} .5s;
-    > header img {
-        width: 35px;
-        margin-left: 7px;
-    }
-    > header p {
-        font-size: 18px;
-    }
+  animation: ${animate} 0.5s;
+  > header img {
+    width: 35px;
+    margin-left: 7px;
+  }
+  > header p {
+    font-size: 18px;
+  }
 
   > header img {
     width: 2rem;
     margin-left: 1rem;
-
   }
 
   > header p {
@@ -48,21 +48,22 @@ export const Container = styled.div`
     margin-bottom: 3rem;
   }
 
-  @media(max-width: 770px){
+  @media (max-width: 770px) {
     width: 100%;
-    
+
     > header h1 {
-        font-size: 24px;
-        img {
-          height: 20px;
-          width: 20px;
-        }
+      font-size: 24px;
+      img {
+        height: 20px;
+        width: 20px;
+      }
     }
-    > header p, > footer span {
-        font-size: 14px;
+    > header p,
+    > footer span {
+      font-size: 14px;
     }
   }
-  @media(max-width: 420px){
+  @media (max-width: 420px) {
     width: 100%;
     height: auto;
     > header p {

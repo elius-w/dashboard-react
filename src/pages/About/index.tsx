@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/function-component-definition */
-import React, {ReactNode} from 'react';
+import React from 'react';
 import { Container } from './styles';
 
-export const Content: React.FC<{ children: ReactNode }> = ({children}) => {
+export const About: React.FC = () => {
   return (
     <Container>
-      <>{children}</>
+      <h1>ABOUT</h1>
     </Container>
   );
 };
 
-export default Content;
+export default About;

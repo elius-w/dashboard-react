@@ -1,100 +1,90 @@
-import React, {useState} from 'react'
-import logoImg from '../../assets/logo.svg'
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../hooks/auth'
-import { useTheme} from '../../hooks/theme'
-
-import Toggle from '../Toggle'
-
+/* eslint-disable import/no-named-as-default */
+import React, { useState } from 'react';
 import {
   MdDashboard,
   MdArrowDownward,
   MdArrowUpward,
   MdExitToApp,
   MdClose,
-  MdMenu, 
-} from 'react-icons/md'
+  MdMenu
+} from 'react-icons/md';
+import logoImg from '../../assets/logo.svg';
+import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/theme';
+
+import Toggle from '../Toggle';
 
 import {
   Container,
   Header,
   LogImg,
   MenuContainer,
+  MenuItemLink,
   Title,
   MenuItemButton,
   ToggleMenu,
-  ThemeToggleFooter,
-} from './styles'
+  ThemeToggleFooter
+} from './styles';
 
-export const Aside = () => {
-
-
-  const { signOut } = useAuth()
+export function Aside() {
+  const { signOut } = useAuth();
   const { toggleTheme, theme } = useTheme();
 
-  const [toggleMenuIsOpened, setToggleMenuIsOpened] = useState(false)
-  const [darkTheme, setDarkTheme] = useState(() => theme.title === 'dark' ? true : false)
+  const [toggleMenuIsOpened, setToggleMenuIsOpened] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(() => theme.title === 'dark');
 
-  const handleToggleMenu = () =>{
-    setToggleMenuIsOpened(!toggleMenuIsOpened)
-  }
+  const handleToggleMenu = () => {
+    setToggleMenuIsOpened(!toggleMenuIsOpened);
+  };
 
   const handleChangeTheme = () => {
-    setDarkTheme(!darkTheme)
-    toggleTheme()
-  }
+    setDarkTheme(!darkTheme);
+    toggleTheme();
+  };
 
   return (
+    <Container menuIsOpen={toggleMenuIsOpened}>
+      <Header>
+        <ToggleMenu onClick={handleToggleMenu}>
+          {toggleMenuIsOpened ? <MdClose /> : <MdMenu />}
+        </ToggleMenu>
 
-        <Container menuIsOpen={toggleMenuIsOpened}>          
-           <Header>
+        <LogImg src={logoImg} alt="Logo Minha Carteira" />
+        <Title>Minha Carteira</Title>
+      </Header>
 
-            <ToggleMenu onClick={handleToggleMenu}>
-              { toggleMenuIsOpened ? <MdClose/> : <MdMenu/>}
-            </ToggleMenu>
+      <MenuContainer>
+        <MenuItemLink href="/">
+          <MdDashboard />
+          Dashboard
+        </MenuItemLink>
 
-              <LogImg src={logoImg} alt="Logo Minha Carteira"/>
-              <Title>Minha Carteira</Title>
-            
-           </Header>
+        <MenuItemLink href="/list/entry-balance">
+          <MdArrowUpward />
+          Entradas
+        </MenuItemLink>
 
-            <MenuContainer>
-                <Link to="/dashboard">
-                  <MdDashboard />
-                  Dashboard
-                </Link>
+        <MenuItemLink href="/list/exit-balance">
+          <MdArrowDownward />
+          Saídas
+        </MenuItemLink>
 
-                <Link to="/list/entry-balance">
-                  <MdArrowUpward/>
-                  Entradas
-                </Link>
+        <MenuItemButton onClick={signOut}>
+          <MdExitToApp />
+          Sair
+        </MenuItemButton>
+      </MenuContainer>
 
-                <Link to="/list/exit-balance">
-                  <MdArrowDownward/>
-                  Saídas
-                </Link>
-
-                <MenuItemButton  onClick={signOut}>
-                  <MdExitToApp/>
-                  Sair
-                </MenuItemButton>
-
-                <ThemeToggleFooter menuIsOpen={toggleMenuIsOpened}>
-                  <Toggle
-                    labelLeft="Light"
-                    labelRight="Dark"
-                    checked={darkTheme}
-                    onChange={handleChangeTheme}
-
-                  />
-                </ThemeToggleFooter>
-
-            </MenuContainer>
-
-        </Container>
-       
-      
-  )
+      <ThemeToggleFooter menuIsOpen={toggleMenuIsOpened}>
+        <Toggle
+          labelLeft="Light"
+          labelRight="Dark"
+          checked={darkTheme}
+          onChange={handleChangeTheme}
+        />
+      </ThemeToggleFooter>
+    </Container>
+  );
 }
 
-export default Aside
+export default Aside;
