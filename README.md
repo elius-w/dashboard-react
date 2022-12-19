@@ -1,7 +1,7 @@
 Dashboard desenvolvido em **ReactJs** com **TypeScript** inteiramente componentizado com **componentes puros**.
 
-<div align="center" >
-  >a  href="https://dashboard-react-wallet.vercel.app/"><img src="https://i.postimg.cc/mZJypQmz/minhacarteirapreview.gif"></a>
+<div align="center">
+  <a  href="https://dashboard-react-wallet.vercel.app/"><img src="https://i.postimg.cc/mZJypQmz/minhacarteirapreview.gif"></a>
 </div>
 
 Não há banco de dados. Os dados são carregados de 2 arquivos que contém arrays simulando os repositórios de dados.
